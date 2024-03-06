@@ -15,7 +15,7 @@ export default function Submissions() {
 
   useEffect(() => {
     async function fetchSubmissions() {
-      const response = await fetch("/api/submissions");
+      const response = await fetch("/api/submissions", { cache: "no-store" });
       const data = await response.json();
       setSubmissions(data);
       setCurrentSubmission(data[0]);
