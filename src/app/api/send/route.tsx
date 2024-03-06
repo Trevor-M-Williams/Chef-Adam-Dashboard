@@ -1,18 +1,25 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import AppleReceiptEmail from "@/email/apple";
+import EmailTemplate from "@/email/template";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-  const { name, order } = await request.json();
+  try {
+    const { submission } = await request.json();
 
-  resend.emails.send({
-    from: "Trev <trev@luminatedenver.dev>",
-    to: "tmw7991@gmail.com",
-    subject: `New order from ${name}`,
-    react: <AppleReceiptEmail order={order as string} />,
-  });
+    const service = submission["service-info"].service?.replaceAll("-", " ");
 
-  return NextResponse.json({ success: true });
+    resend.emails.send({
+      from: "Form Submission <orders@luminatedenver.dev>",
+      to: "tmw7991@gmail.com",
+      subject: `New ${service} order`,
+      react: <EmailTemplate submission={submission} />,
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ success: false, error });
+  }
 }

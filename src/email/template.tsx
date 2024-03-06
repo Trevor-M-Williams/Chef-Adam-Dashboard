@@ -13,7 +13,11 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
-export default function AppleReceiptEmail({ order }: { order: string }) {
+export default function EmailTemplate({
+  submission,
+}: {
+  submission: Submission;
+}) {
   return (
     <Html>
       <Head />
@@ -64,7 +68,7 @@ export default function AppleReceiptEmail({ order }: { order: string }) {
                         textDecoration: "underline",
                       }}
                     >
-                      {order}
+                      {submission["service-info"].service} - {submission.id}
                     </Link>
                   </Column>
                   <Column style={informationTableColumn}>
