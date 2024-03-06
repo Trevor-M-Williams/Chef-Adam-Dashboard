@@ -4,6 +4,19 @@ import EmailTemplate from "@/email/template";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const options = {
+  status: 200,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  },
+};
+
+export async function OPTIONS() {
+  return NextResponse.json({}, options);
+}
+
 export async function POST(request: Request) {
   try {
     const { submission } = await request.json();
@@ -17,9 +30,9 @@ export async function POST(request: Request) {
       react: <EmailTemplate submission={submission} />,
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true }, options);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ success: false, error });
+    return NextResponse.json({ error }, { ...options, status: 500 });
   }
 }
