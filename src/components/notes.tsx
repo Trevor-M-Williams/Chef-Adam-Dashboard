@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-import { getNote } from "@/firebase/actions";
-
 import TextEditor from "@/components/text-editor";
 
 export default function Notes({ id }: { id: string }) {
@@ -21,13 +19,6 @@ export default function Notes({ id }: { id: string }) {
       console.log(error);
     }
   }
-
-  useEffect(() => {
-    getNote(id).then((note: any) => {
-      setContent(note);
-      setLoading(false);
-    });
-  }, [id]);
 
   if (loading) return null;
 

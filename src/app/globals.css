@@ -68,15 +68,6 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 /* -------------------- Scrollbar -------------------- */
 ::-webkit-scrollbar {
   height: 0.5rem;
@@ -86,12 +77,6 @@
   background: #bbb;
   border-radius: 0.25rem;
 }
-
-/* -------------------- User Button -------------------- */
-/* .cl-internal-11ewti4 {
-  height: 1.5rem;
-  width: 1.5rem;
-} */
 
 /* -------------------- Text Editor -------------------- */
 .tiptap.ProseMirror {

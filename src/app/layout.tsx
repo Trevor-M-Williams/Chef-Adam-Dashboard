@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Chef SAAS",
-  description: "Chef SAAS is a platform for chefs to manage their business.",
+  title: "Chef Adam Dashboard",
+  description: "A dashboard for Chef Adam's and orders",
 };
 
 export default function RootLayout({

@@ -14,37 +14,131 @@ export default function SubmissionsDetails({
   notesMode: boolean;
   setNotesMode: any;
 }) {
+  const service = submission["service-info"].service;
+
   return (
-    <div className="max-h-full flex flex-col pt-6 overflow-auto">
-      <div className="flex justify-between mb-4 px-6">
+    <div className="max-h-full flex flex-col p-6 overflow-auto">
+      <div className="flex justify-between mb-4">
         <Title text={notesMode ? "Notes" : "Details"} />
-        <div className="flex gap-2">
-          <NotesIcon />
-          <Switch
-            checked={notesMode}
-            onCheckedChange={() => setNotesMode(!notesMode)}
-          />
-        </div>
       </div>
 
-      <ScrollArea className="flex-grow px-6 ">
-        {submission &&
-          (notesMode ? (
-            <Notes id={submission.id} />
-          ) : (
-            submission.formInputs.map((input: any, index: number) => {
-              let value = submission[input.name] || "N/A";
-              if (Array.isArray(value)) value = value.join(", ");
-              return (
-                <div key={index} className="flex flex-col mb-4">
-                  <div className="shrink-0 text-sm font-semibold mb-1">
-                    {input.name}
-                  </div>
-                  <div className="">{value}</div>
+      <ScrollArea className="flex-grow">
+        {submission && (
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <div className="text-xl font-semibold">Contact Info</div>
+              <div className="flex gap-2">
+                <div className="font-semibold">Name:</div>
+                {submission["contact-info"].name}
+              </div>
+              <div className="flex gap-2">
+                <div className="font-bold">Phone:</div>
+                {submission["contact-info"].phone}
+              </div>
+              <div className="flex gap-2">
+                <div className="font-bold">Email:</div>
+                {submission["contact-info"].email}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="text-xl font-semibold">Service Info</div>
+              <div className="flex gap-2">
+                <div className="font-semibold">Service:</div>
+                <div className="capitalize">{service.replaceAll("-", " ")}</div>
+              </div>
+
+              {service === "meal-plan" && (
+                <div className="flex gap-2">
+                  <div className="font-bold ">Plan:</div>
+                  {submission["service-info"]["meal-plan"]}
                 </div>
-              );
-            })
-          ))}
+              )}
+              {service !== "meal-plan" && (
+                <div>
+                  <div className="font-bold">Venue:</div>
+                  {submission["service-info"].venue}
+                </div>
+              )}
+            </div>
+
+            {service === "meal-plan" && (
+              <div className="space-y-2">
+                <div className="text-xl font-semibold">Meal Plan Info</div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Age:</div>
+                  {submission["meal-plan-info"].age}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Height:</div>
+                  {submission["meal-plan-info"]["height-ft"]}ft{" "}
+                  {submission["meal-plan-info"]["height-in"]}in
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Weight:</div>
+                  {submission["meal-plan-info"].weight}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold ">Goal:</div>
+                  <div className="capitalize">
+                    {submission["meal-plan-info"].goal.replaceAll("-", " ")}
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Activity Level:</div>
+                  {submission["meal-plan-info"]["activity-level"]}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Activities:</div>
+                  {submission["meal-plan-info"].activities}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Allergies:</div>
+                  {submission["meal-plan-info"].allergies}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Notice Confirmation:</div>
+                  {submission["meal-plan-info"]["notice-confirmation"]
+                    ? "Yes"
+                    : "No"}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Fish:</div>
+                  {submission["meal-plan-info"].fish ? "Yes" : "No"}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Shrimp:</div>
+                  {submission["meal-plan-info"].shrimp ? "Yes" : "No"}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Chicken:</div>
+                  {submission["meal-plan-info"].chicken ? "Yes" : "No"}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Beef:</div>
+                  {submission["meal-plan-info"].beef ? "Yes" : "No"}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Pork:</div>
+                  {submission["meal-plan-info"].pork ? "Yes" : "No"}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Turkey:</div>
+                  {submission["meal-plan-info"].turkey ? "Yes" : "No"}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Lamb:</div>
+                  {submission["meal-plan-info"].lamb ? "Yes" : "No"}
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-2">
+              <div className="text-xl font-semibold">Additional Info</div>
+              {submission["additional-info"] || "None"}
+            </div>
+          </div>
+        )}
       </ScrollArea>
     </div>
   );
