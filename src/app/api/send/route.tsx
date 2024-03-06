@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import EmailTemplate from "@/email/template";
+import { revalidatePath } from "next/cache";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -35,6 +36,8 @@ export async function POST(request: Request) {
     }
 
     console.log(data);
+    revalidatePath("/dashboard");
+
     return NextResponse.json({ success: true }, options);
   } catch (error) {
     console.error(error);
