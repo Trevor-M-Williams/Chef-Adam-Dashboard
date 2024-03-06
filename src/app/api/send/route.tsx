@@ -25,7 +25,11 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: "Form Submission <orders@luminatedenver.dev>",
-      to: ["tmw7991@gmail.com", "cj@luminatedenver.com"],
+      to: [
+        "tmw7991@gmail.com",
+        "cj@luminatedenver.com",
+        "adam@chefadamserota.com",
+      ],
       subject: `New ${service} order`,
       react: <EmailTemplate submission={submission} />,
     });
