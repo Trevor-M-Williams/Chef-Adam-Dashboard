@@ -7,36 +7,22 @@ import Title from "@/components/title";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Submissions() {
-  // const [submissions, setSubmissions] = useState<any>(null);
-  const submissions = [
-    {
-      "meal-plan-info": {
-        age: "1",
-        "height-ft": "1",
-        "height-in": "1",
-        weight: "1",
-        goal: "weight-maintain",
-        "activity-level": "light",
-        activities: "Sports",
-        allergies: "",
-        fish: false,
-        shrimp: false,
-        chicken: false,
-        beef: false,
-        pork: false,
-        turkey: true,
-        lamb: false,
-        "notice-confirmation": true,
-      },
-      "contact-info": { name: "John Doe", phone: "1234567890", email: "m@x" },
-      "event-info": {},
-      "service-info": { service: "meal-plan", venue: "", "meal-plan": "10" },
-      "additional-info": "",
-      "checkout-link": "https://buy.stripe.com/3cs6pl4Gl1Qg0BW00t",
-    },
-  ];
-  const [currentSubmission, setCurrentSubmission] = useState(submissions[0]);
+  const [submissions, setSubmissions] = useState<Submission[] | null>(null);
+  const [currentSubmission, setCurrentSubmission] = useState<Submission | null>(
+    null
+  );
   const [notesMode, setNotesMode] = useState(false);
+
+  useEffect(() => {
+    async function fetchSubmissions() {
+      const response = await fetch("/api/submissions");
+      const data = await response.json();
+      setSubmissions(data);
+      setCurrentSubmission(data[0]);
+    }
+
+    fetchSubmissions();
+  }, []);
 
   return (
     <div className="h-full w-full grid grid-rows-2 sm:grid-cols-2 sm:grid-rows-1">

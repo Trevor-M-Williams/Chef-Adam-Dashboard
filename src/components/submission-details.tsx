@@ -14,7 +14,22 @@ export default function SubmissionsDetails({
   notesMode: boolean;
   setNotesMode: any;
 }) {
+  if (!submission) return null;
+
   const service = submission["service-info"].service;
+
+  const contactName =
+    submission["contact-info"].name || submission["contact-info"]["poc-name"];
+  const contactPhone =
+    submission["contact-info"].phone || submission["contact-info"]["poc-phone"];
+  const contactEmail =
+    submission["contact-info"].email || submission["contact-info"]["poc-email"];
+
+  const eventAddress =
+    submission["event-info"].address ||
+    submission["event-info"]["marina-address"];
+  const eventBoatName = submission["event-info"]["boat-name"];
+  const eventPartySize = submission["event-info"]["party-size"];
 
   return (
     <div className="max-h-full flex flex-col p-6 overflow-auto">
@@ -29,15 +44,15 @@ export default function SubmissionsDetails({
               <div className="text-xl font-semibold">Contact Info</div>
               <div className="flex gap-2">
                 <div className="font-semibold">Name:</div>
-                {submission["contact-info"].name}
+                {contactName}
               </div>
               <div className="flex gap-2">
                 <div className="font-bold">Phone:</div>
-                {submission["contact-info"].phone}
+                {contactPhone}
               </div>
               <div className="flex gap-2">
                 <div className="font-bold">Email:</div>
-                {submission["contact-info"].email}
+                {contactEmail}
               </div>
             </div>
 
@@ -55,14 +70,16 @@ export default function SubmissionsDetails({
                 </div>
               )}
               {service !== "meal-plan" && (
-                <div>
-                  <div className="font-bold">Venue:</div>
-                  {submission["service-info"].venue}
+                <div className="flex gap-2">
+                  <div className="font-semibold">Venue:</div>
+                  <div className="capitalize">
+                    {submission["service-info"].venue}
+                  </div>
                 </div>
               )}
             </div>
 
-            {service === "meal-plan" && (
+            {service === "meal-plan" ? (
               <div className="space-y-2">
                 <div className="text-xl font-semibold">Meal Plan Info</div>
                 <div className="flex gap-2">
@@ -130,6 +147,34 @@ export default function SubmissionsDetails({
                   <div className="font-bold">Lamb:</div>
                   {submission["meal-plan-info"].lamb ? "Yes" : "No"}
                 </div>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <div className="text-xl font-semibold">Event Info</div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Address:</div>
+                  {eventAddress}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Date:</div>
+                  {submission["event-info"]["date"]}
+                </div>
+                <div className="flex gap-2">
+                  <div className="font-bold">Time:</div>
+                  {submission["event-info"]["time"]}
+                </div>
+                {eventBoatName && (
+                  <div className="flex gap-2">
+                    <div className="font-bold">Boat Name:</div>
+                    {eventBoatName}
+                  </div>
+                )}
+                {eventPartySize && (
+                  <div className="flex gap-2">
+                    <div className="font-bold">Party Size:</div>
+                    {eventPartySize}
+                  </div>
+                )}
               </div>
             )}
 
