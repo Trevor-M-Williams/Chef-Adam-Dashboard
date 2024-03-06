@@ -20,16 +20,21 @@ export async function OPTIONS() {
 export async function POST(request: Request) {
   try {
     const { submission } = await request.json();
-
     const service = submission["service-info"].service?.replaceAll("-", " ");
 
-    resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: "Form Submission <orders@luminatedenver.dev>",
       to: "tmw7991@gmail.com",
       subject: `New ${service} order`,
       react: <EmailTemplate submission={submission} />,
     });
 
+    if (error) {
+      console.error(error);
+      return NextResponse.json({ error }, { ...options, status: 400 });
+    }
+
+    console.log(data);
     return NextResponse.json({ success: true }, options);
   } catch (error) {
     console.error(error);

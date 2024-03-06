@@ -61,16 +61,7 @@ export default function SubmissionsTable({
                 )}
                 onClick={() => handleSelection(submission)}
               >
-                <TableCell>
-                  <Link href={`/dashboard/forms/${submission.formId}`}>
-                    <Button
-                      variant={"ghost"}
-                      className="px-1 hover:bg-slate-200"
-                    >
-                      {contactName}
-                    </Button>
-                  </Link>
-                </TableCell>
+                <TableCell>{contactName}</TableCell>
                 <TableCell className="capitalize">
                   {service.replaceAll("-", " ")}
                 </TableCell>
