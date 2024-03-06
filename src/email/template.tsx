@@ -3,10 +3,7 @@ import {
   Container,
   Column,
   Head,
-  Hr,
   Html,
-  Link,
-  Preview,
   Row,
   Section,
   Text,
@@ -18,17 +15,22 @@ export default function EmailTemplate({
 }: {
   submission: Submission;
 }) {
+  const contactName =
+    submission["contact-info"].name || submission["contact-info"]["poc-name"];
+  const contactPhone =
+    submission["contact-info"].phone || submission["contact-info"]["poc-phone"];
+  const contactEmail = submission["contact-info"].email;
+
   return (
     <Html>
       <Head />
-      <Preview>Receipt</Preview>
 
       <Body style={main}>
         <Container style={container}>
           <Section>
             <Column></Column>
 
-            <Column align="right" style={tableCell}>
+            <Column style={tableCell}>
               <Text style={heading}>Receipt</Text>
             </Column>
           </Section>
@@ -38,72 +40,26 @@ export default function EmailTemplate({
               <Column colSpan={2}>
                 <Row>
                   <Column style={informationTableColumn}>
-                    <Text style={informationTableLabel}>APPLE ID</Text>
-                    <Link
-                      style={{
-                        ...informationTableValue,
-                        color: "#15c",
-                        textDecoration: "underline",
-                      }}
-                    >
-                      zeno.rocha@gmail.com
-                    </Link>
+                    <Text style={informationTableLabel}>NAME</Text>
+                    <Text style={informationTableLabel}>{contactName}</Text>
                   </Column>
                 </Row>
 
                 <Row>
                   <Column style={informationTableColumn}>
-                    <Text style={informationTableLabel}>INVOICE DATE</Text>
-                    <Text style={informationTableValue}>18 Jan 2023</Text>
+                    <Text style={informationTableLabel}>Phone</Text>
+                    <Text style={informationTableValue}>{contactPhone}</Text>
                   </Column>
                 </Row>
 
                 <Row>
                   <Column style={informationTableColumn}>
-                    <Text style={informationTableLabel}>ORDER</Text>
-                    <Link
-                      style={{
-                        ...informationTableValue,
-                        color: "#15c",
-                        textDecoration: "underline",
-                      }}
-                    >
-                      {submission["service-info"].service} - {submission.id}
-                    </Link>
-                  </Column>
-                  <Column style={informationTableColumn}>
-                    <Text style={informationTableLabel}>DOCUMENT NO.</Text>
-                    <Text style={informationTableValue}>186623754793</Text>
+                    <Text style={informationTableLabel}>EMAIL</Text>
+                    <Text style={informationTableValue}>{contactEmail}</Text>
                   </Column>
                 </Row>
-              </Column>
-              <Column style={informationTableColumn} colSpan={2}>
-                <Text style={informationTableLabel}>BILLED TO</Text>
-                <Text style={informationTableValue}>
-                  Visa .... 7461 (Apple Pay)
-                </Text>
-                <Text style={informationTableValue}>Zeno Rocha</Text>
-                <Text style={informationTableValue}>2125 Chestnut St</Text>
-                <Text style={informationTableValue}>
-                  San Francisco, CA 94123
-                </Text>
-                <Text style={informationTableValue}>USA</Text>
               </Column>
             </Row>
-          </Section>
-          <Section style={productTitleTable}>
-            <Text style={productsTitle}>App Store</Text>
-          </Section>
-
-          <Hr style={productPriceLine} />
-          <Section align="right">
-            <Column style={tableCell} align="right">
-              <Text style={productPriceTotal}>TOTAL</Text>
-            </Column>
-            <Column style={productPriceVerticalLine}></Column>
-            <Column style={productPriceLargeWrapper}>
-              <Text style={productPriceLarge}>$14.99</Text>
-            </Column>
           </Section>
         </Container>
       </Body>
