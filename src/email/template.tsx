@@ -15,6 +15,7 @@ export default function EmailTemplate({
 }: {
   submission: Submission;
 }) {
+  const service = submission["service-info"].service.replaceAll("-", " ");
   const contactName =
     submission["contact-info"].name || submission["contact-info"]["poc-name"];
   const contactPhone =
@@ -31,7 +32,7 @@ export default function EmailTemplate({
             <Column></Column>
 
             <Column style={tableCell}>
-              <Text style={heading}>Receipt</Text>
+              <Text style={heading}>New {service} order</Text>
             </Column>
           </Section>
 
@@ -125,44 +126,3 @@ const informationTableValue = {
   padding: "0",
   lineHeight: 1.4,
 };
-
-const productTitleTable = {
-  ...informationTable,
-  margin: "30px 0 15px 0",
-  height: "24px",
-};
-
-const productsTitle = {
-  background: "#fafafa",
-  paddingLeft: "10px",
-  fontSize: "14px",
-  fontWeight: "500",
-  margin: "0",
-};
-
-const productPriceTotal = {
-  margin: "0",
-  color: "rgb(102,102,102)",
-  fontSize: "10px",
-  fontWeight: "600",
-  padding: "0px 30px 0px 0px",
-  textAlign: "right" as const,
-};
-
-const productPriceLarge = {
-  margin: "0px 20px 0px 0px",
-  fontSize: "16px",
-  fontWeight: "600",
-  whiteSpace: "nowrap" as const,
-  textAlign: "right" as const,
-};
-
-const productPriceLine = { margin: "30px 0 0 0" };
-
-const productPriceVerticalLine = {
-  height: "48px",
-  borderLeft: "1px solid",
-  borderColor: "rgb(238,238,238)",
-};
-
-const productPriceLargeWrapper = { display: "table-cell", width: "90px" };
