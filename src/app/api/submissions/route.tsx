@@ -3,6 +3,7 @@ import { db } from "@/db/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 export async function GET(request: Request) {
+  console.log(request.headers);
   try {
     const querySnapshot = await getDocs(collection(db, "orders"));
     const submissions = querySnapshot.docs.map((doc) => {
