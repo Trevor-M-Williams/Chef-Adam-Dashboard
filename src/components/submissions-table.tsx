@@ -9,7 +9,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 export default function SubmissionsTable({
   submissions,
@@ -40,6 +39,11 @@ export default function SubmissionsTable({
       </TableHeader>
       <TableBody>
         {submissions
+          .filter(
+            (submission: any) =>
+              submission["contact-info"].name !== "test" &&
+              submission["contact-info"]["poc-name"] !== "test"
+          )
           .sort((a: Submission, b: Submission) => {
             return parseInt(b.id) - parseInt(a.id);
           })

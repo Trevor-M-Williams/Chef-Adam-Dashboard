@@ -114,6 +114,9 @@ export default function SubmissionsDetails({
                   <div className="font-bold">Weight:</div>
                   {submission["meal-plan-info"].weight}
                 </div>
+
+                <div className="w-12 h-px bg-gray-300"></div>
+
                 <div className="flex gap-2">
                   <div className="font-bold ">Goal:</div>
                   <div className="capitalize">
@@ -132,12 +135,9 @@ export default function SubmissionsDetails({
                   <div className="font-bold">Allergies:</div>
                   {submission["meal-plan-info"].allergies}
                 </div>
-                <div className="flex gap-2">
-                  <div className="font-bold">Notice Confirmation:</div>
-                  {submission["meal-plan-info"]["notice-confirmation"]
-                    ? "Yes"
-                    : "No"}
-                </div>
+
+                <div className="w-12 h-px bg-gray-300"></div>
+
                 <div className="flex gap-2">
                   <div className="font-bold">Fish:</div>
                   {submission["meal-plan-info"].fish ? "Yes" : "No"}
