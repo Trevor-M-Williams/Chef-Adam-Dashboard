@@ -23,13 +23,24 @@ export async function POST(request: Request) {
     const { submission } = await request.json();
     const service = submission["service-info"].service?.replaceAll("-", " ");
 
+    const testEmailList = ["tmw7991@gmail.com"];
+    const prodEmailList = [
+      "tmw7991@gmail.com",
+      "cj@luminatedenver.com",
+      "adam@chefadamserota.com",
+    ];
+
+    let emailList = prodEmailList;
+    if (
+      submission["contact-info"].name === "test" ||
+      submission["contact-info"]["poc-name"]
+    ) {
+      emailList = testEmailList;
+    }
+
     const { data, error } = await resend.emails.send({
       from: "Form Submission <orders@luminatedenver.dev>",
-      to: [
-        "tmw7991@gmail.com",
-        "cj@luminatedenver.com",
-        "adam@chefadamserota.com",
-      ],
+      to: emailList,
       subject: `New ${service} order`,
       react: <EmailTemplate submission={submission} />,
     });

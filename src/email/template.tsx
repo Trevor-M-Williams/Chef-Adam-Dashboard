@@ -42,7 +42,7 @@ export default function EmailTemplate({
                 <Row>
                   <Column style={informationTableColumn}>
                     <Text style={informationTableLabel}>NAME</Text>
-                    <Text style={informationTableLabel}>{contactName}</Text>
+                    <Text style={informationTableValue}>{contactName}</Text>
                   </Column>
                 </Row>
 
