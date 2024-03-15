@@ -31,28 +31,9 @@ export default function SubmissionsDetails({
   const eventBoatName = submission["event-info"]["boat-name"];
   const eventPartySize = submission["event-info"]["party-size"];
 
-  async function sendEmail() {
-    const res = await fetch("/api/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ submission }),
-    });
-
-    if (res.ok) {
-      alert("Email sent");
-    } else {
-      alert("Error sending email");
-    }
-  }
-
   return (
     <div className="max-h-full flex flex-col p-6 overflow-auto">
-      <div
-        className="flex justify-between mb-4 hover:bg-blue-100 cursor-pointer"
-        onClick={sendEmail}
-      >
+      <div className="flex justify-between mb-4 hover:bg-blue-100 cursor-pointer">
         <Title text={notesMode ? "Notes" : "Details"} />
       </div>
 
