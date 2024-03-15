@@ -33,9 +33,7 @@ export default function SubmissionsDetails({
 
   return (
     <div className="max-h-full flex flex-col p-6 overflow-auto">
-      <div className="flex justify-between mb-4 hover:bg-blue-100 cursor-pointer">
-        <Title text={notesMode ? "Notes" : "Details"} />
-      </div>
+      <Title text={notesMode ? "Notes" : "Details"} />
 
       <ScrollArea className="flex-grow">
         {submission && (
