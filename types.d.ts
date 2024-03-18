@@ -1,22 +1,22 @@
 type Submission = {
   id: string;
   "meal-plan-info": {
-    age: string;
-    "height-ft": string;
-    "height-in": string;
-    weight: string;
-    goal: string;
-    "activity-level": string;
-    activities: string;
-    allergies: string;
-    fish: boolean;
-    shrimp: boolean;
-    chicken: boolean;
-    beef: boolean;
-    pork: boolean;
-    turkey: boolean;
-    lamb: boolean;
-    "notice-confirmation": boolean;
+    age?: string;
+    "height-ft"?: string;
+    "height-in"?: string;
+    weight?: string;
+    goal?: string;
+    "activity-level"?: string;
+    activities?: string;
+    allergies?: string;
+    fish?: boolean;
+    shrimp?: boolean;
+    chicken?: boolean;
+    beef?: boolean;
+    pork?: boolean;
+    turkey?: boolean;
+    lamb?: boolean;
+    "notice-confirmation"?: boolean;
   };
   "contact-info": {
     name?: string;

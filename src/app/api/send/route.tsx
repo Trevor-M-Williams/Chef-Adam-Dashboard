@@ -19,8 +19,8 @@ export async function OPTIONS() {
 }
 
 export async function POST(request: Request) {
+  const { submission } = await request.json();
   try {
-    const { submission } = await request.json();
     const service = submission["service-info"].service?.replaceAll("-", " ");
 
     const testEmailList = ["tmw7991@gmail.com"];
@@ -50,11 +50,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error }, { ...options, status: 400 });
     }
 
-    console.log(data);
     revalidatePath("/dashboard");
 
     return NextResponse.json({ success: true }, options);
   } catch (error) {
+    console.log(submission);
     console.error(error);
     return NextResponse.json({ error }, { ...options, status: 500 });
   }
