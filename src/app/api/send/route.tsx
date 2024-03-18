@@ -28,6 +28,8 @@ export async function POST(request: Request) {
       "tmw7991@gmail.com",
       "cj@luminatedenver.com",
       "adam@chefadamserota.com",
+      "gia@chefadamserota.com",
+      "marcel@chefadamserota.com",
     ];
 
     let emailList = prodEmailList;
