@@ -31,9 +31,9 @@ const submission = {
     shrimp: true,
     chicken: true,
     beef: true,
-    pork: true,
-    turkey: true,
-    lamb: true,
+    pork: false,
+    turkey: false,
+    lamb: false,
     "notice-confirmation": true,
   },
   "additional-info":

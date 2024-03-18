@@ -137,6 +137,57 @@ export default function EmailTemplate({
                     </Text>
                   </Column>
                 </Row>
+
+                <Row>
+                  <Column style={columnStyles}>
+                    <Text style={labelStyles}>GOAL</Text>
+                    <Text style={valuesStyles}>
+                      {submission["meal-plan-info"].goal}
+                    </Text>
+                  </Column>
+                </Row>
+
+                <Row>
+                  <Column style={columnStyles}>
+                    <Text style={labelStyles}>ACTIVITY LEVEL</Text>
+                    <Text style={valuesStyles}>
+                      {submission["meal-plan-info"]["activity-level"]}
+                    </Text>
+                  </Column>
+                </Row>
+
+                <Row>
+                  <Column style={columnStyles}>
+                    <Text style={labelStyles}>ACTIVITIES</Text>
+                    <Text style={valuesStyles}>
+                      {submission["meal-plan-info"].activities}
+                    </Text>
+                  </Column>
+                </Row>
+
+                <Row>
+                  <Column style={columnStyles}>
+                    <Text style={labelStyles}>ALLERGIES</Text>
+                    <Text style={valuesStyles}>
+                      {submission["meal-plan-info"].allergies}
+                    </Text>
+                  </Column>
+                </Row>
+
+                <Row>
+                  <Column style={columnStyles}>
+                    <Text style={labelStyles}>FOODS</Text>
+                    <Text style={valuesStyles}>
+                      {submission["meal-plan-info"].fish && "Fish, "}
+                      {submission["meal-plan-info"].shrimp && "Shrimp, "}
+                      {submission["meal-plan-info"].chicken && "Chicken, "}
+                      {submission["meal-plan-info"].beef && "Beef, "}
+                      {submission["meal-plan-info"].pork && "Pork, "}
+                      {submission["meal-plan-info"].turkey && "Turkey, "}
+                      {submission["meal-plan-info"].lamb && "Lamb"}
+                    </Text>
+                  </Column>
+                </Row>
               </Section>
             </>
           ) : (
@@ -201,7 +252,7 @@ export default function EmailTemplate({
             <Row>
               <Column style={columnStyles}>
                 <Text style={valuesStyles}>
-                  {submission["additional-info"]}
+                  {submission["additional-info"] || "N/A"}
                 </Text>
               </Column>
             </Row>
